@@ -74,3 +74,4 @@ Open URL: http://127.0.0.1:8000/api/bookings/john@example.com/
 Postman Request: ** https://booking-0785.postman.co/workspace/84c588fb-c2d5-49b7-8481-2c229e497ccb/request/43356236-fcebc7eb-9ffd-419f-994c-a92d56123093?action=share&source=copy-link&creator=43356236&ctx=documentation **
 
 
+* * To run Test Cases : > python manage.py test booking * *

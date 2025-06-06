@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import make_aware, localtime, is_naive
 
 class FitnessClass(models.Model):
     name = models.CharField(max_length=100)
@@ -9,6 +10,16 @@ class FitnessClass(models.Model):
     def __str__(self):
         return self.name
 
+    def get_ist_time(self):
+        """ Ensure stored datetime converts to IST before returning """
+        return localtime(self.date_time)
+
+    def save(self, *args, **kwargs):
+        """ Convert naive datetime to IST before saving """
+        if self.date_time and is_naive(self.date_time):  
+            self.date_time = make_aware(self.date_time)  # Convert only if naive
+        super().save(*args, **kwargs)
+        
 class Booking(models.Model):
     class_booked = models.ForeignKey(FitnessClass, on_delete=models.CASCADE)
     client_name = models.CharField(max_length=100)
